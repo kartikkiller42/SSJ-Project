@@ -48,8 +48,8 @@ public class PlayerMovement2 : MonoBehaviour
         else if (collision.gameObject.tag == "Scythe")
         {
             Debug.Log("WINWIN");
-            //end cutscene
-            //SceneManager.LoadScene();
+            
+            SceneManager.LoadScene("LastScene");
         }
     }
     IEnumerator Death()
