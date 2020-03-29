@@ -20,7 +20,7 @@ TagManager:
   - Mask
   - BehindMask
   - Black
-  - 
+  - PostProcessing
   - 
   - 
   - 
@@ -45,4 +45,7 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2063363
+    locked: 0
+  - name: New Layer
+    uniqueID: 3177927159
     locked: 0
