@@ -43,7 +43,13 @@ public class PlayerMovement2 : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             StartCoroutine(Death());
-            
+
+        }
+        else if (collision.gameObject.tag == "Scythe")
+        {
+            Debug.Log("WINWIN");
+            //end cutscene
+            //SceneManager.LoadScene();
         }
     }
     IEnumerator Death()
