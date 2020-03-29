@@ -36,6 +36,7 @@ public class FieldOfView : MonoBehaviour
         {
             Vector3 vertex = origin + (GetVectorFromAngle(angle) * viewDistance);
             RaycastHit2D raycast2D = Physics2D.Raycast(origin, GetVectorFromAngle(angle), viewDistance,layerMask);
+            mesh.RecalculateBounds();
             if (raycast2D.collider == null)
             {
                 //no hit
