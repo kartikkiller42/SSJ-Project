@@ -17,11 +17,13 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-	private bool m_Grounded;            // Whether or not the player is grounded.
+	public bool m_Grounded;            // Whether or not the player is grounded.
 	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+    public Vector3 offset;
+    public GameObject glowyBoiRef;
 
 	[Header("Events")]
 	[Space]
@@ -43,6 +45,7 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnCrouchEvent == null)
 			OnCrouchEvent = new BoolEvent();
+        offset = glowyBoiRef.GetComponent<GlowyBoiMovement>().offset;
 	}
 
 	private void FixedUpdate()
@@ -145,6 +148,7 @@ public class CharacterController2D : MonoBehaviour
 		// Multiply the player's x local scale by -1.
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
+        offset = new Vector3(-offset.x, offset.y, offset.z);
 		transform.localScale = theScale;
 	}
 }

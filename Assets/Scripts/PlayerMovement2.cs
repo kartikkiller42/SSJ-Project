@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //Tutorial followed: https://www.youtube.com/watch?v=dwcT-Dch0bA&t=1012s
 public class PlayerMovement2 : MonoBehaviour
@@ -12,7 +13,10 @@ public class PlayerMovement2 : MonoBehaviour
 
     public float runSpeed = 40f;
 
-    private bool jump = false;
+    public bool jump = false;
+
+    public ParticleSystem particleDeath;
+    public GameObject spriteRef;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,5 +37,24 @@ public class PlayerMovement2 : MonoBehaviour
     {
         controller.Move(horizontalMove*Time.fixedDeltaTime,false,jump);
         jump = false;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            StartCoroutine(Death());
+            
+        }
+    }
+    IEnumerator Death()
+    {
+        //disable sprite
+        spriteRef.SetActive(false);
+        //spawn particle effect
+        Instantiate(particleDeath, transform.position, transform.rotation);
+        yield return new WaitForSeconds(3f);
+        //reset level
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }
