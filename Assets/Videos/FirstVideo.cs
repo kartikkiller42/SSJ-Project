@@ -14,6 +14,12 @@ public class FirstVideo : MonoBehaviour
     }
     void LoadScene(VideoPlayer vp)
     {
+        StartCoroutine(LoadNext());
+    }
+
+IEnumerator LoadNext()
+    {
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneName);
     }
 }

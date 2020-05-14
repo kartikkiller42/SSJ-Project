@@ -15,21 +15,44 @@ public class PlayerMovement2 : MonoBehaviour
 
     public bool jump = false;
 
+    public bool isJumping;
+
     public ParticleSystem particleDeath;
     public GameObject spriteRef;
+
+    public Animator animator;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        animator = spriteRef.GetComponent<Animator>(); 
     }
 
     // Update is called once per frame
     void Update()
     {
         horizontalMove = Input.GetAxisRaw(("Horizontal"))*runSpeed;
+        if(horizontalMove != 0)
+        {
+            animator.SetBool("move", true);
+        }
+        if (horizontalMove == 0)
+        {
+            animator.SetBool("move", false);
+        }
         if (Input.GetButtonDown(("Jump")))
         {
             jump = true;
+            isJumping = true;
+        }
+        if (!controller.m_Grounded && isJumping)
+        {
+            animator.SetBool("jumpL", true);
+            animator.SetBool("landanim", true);
+        }
+        if (controller.m_Grounded)
+        {
+            animator.SetBool("jumpL", false);
+            animator.SetBool("landanim", false);
         }
     }
 
